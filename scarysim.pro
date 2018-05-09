@@ -8,7 +8,7 @@ QT       += core gui\
             opengl\
             widgets
 
-LIBS     += -lglut -lGLU
+LIBS     += -lglu32 -lopengl32
 
 TARGET = scarysim
 TEMPLATE = app
@@ -26,6 +26,9 @@ HEADERS  += mainwindow.h \
     scara.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    obj.qrc
 
 
 

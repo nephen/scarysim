@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>arm1.obj</file>
+        <file>arm2.obj</file>
+        <file>arm3.obj</file>
+        <file>base.obj</file>
+    </qresource>
+</RCC>
