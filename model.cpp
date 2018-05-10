@@ -22,6 +22,14 @@ void replace(std::string &str, const char from, const char to)
         if(*i == from) *i = to;
 }
 
+/**
+*@projectName   FlRobotSim
+*@brief         The model file is
+*               first searched from the current application path,
+*               and if it is not found, the default resource file is used
+*@author        XingZhang.Wu
+*@date          20180510
+**/
 void Model::load(const char *filename)
 {
     std::cout << "Loading obj\n";
@@ -32,15 +40,30 @@ void Model::load(const char *filename)
     faces.clear();
     normals.clear();
 
-    // Specify file：
+    // Specify file:
     QFile file(filename);
 
     // Read only open:
     file.open(QIODevice::ReadOnly);
 
-    if(!file.isOpen()) {
-        std::cout << "Obj file not found\n";
-        exit(-1);
+    if(!file.isOpen())
+    {
+        //If the default path does not exist, open the resource file
+        file.setFileName(QString::fromStdString(filename).prepend(":/"));
+        file.open(QIODevice::ReadOnly);
+        if(file.isOpen())
+        {
+            std::cout << "Obj file is located in the default directory\n";
+        }
+        else
+        {
+            std::cout << "Obj file not found\n";
+            exit(-1);
+        }
+    }
+    else
+    {
+       std::cout << "Obj file is located in the app directory\n";
     }
 
     QString s;
@@ -107,7 +130,7 @@ void Model::load(const char *filename)
             sstr >> matname;
 
             // znajdz numer materialu
-            int i = 0;
+            unsigned int i = 0;
             for(; i < materials.size(); ++i) {
                 if(matname == materials[i].name) break;
             }
@@ -127,14 +150,28 @@ void Model::load_materials()
     std::cout << "Loading materials: " << matfile.c_str() << "\n";
 
     // Specify file：
-    QFile file(QString::fromStdString(matfile).prepend(":/"));
+    QFile file(QString::fromStdString(matfile));
 
     // Read only open:
     file.open(QIODevice::ReadOnly);
 
-    if(!file.isOpen()) {
-        std::cout << "Mat file not found\n";
-        exit(-1);
+    if(!file.isOpen())
+    {
+        file.setFileName(QString::fromStdString(matfile).prepend(":/"));
+        file.open(QIODevice::ReadOnly);
+        if(!file.isOpen())
+        {
+            std::cout << "Mat file not found\n";
+            exit(-1);
+        }
+        else
+        {
+            std::cout << "Mat file is located in the default directory\n";
+        }
+    }
+    else
+    {
+        std::cout << "Mat file is located in the app directory\n";
     }
 
     QString line;

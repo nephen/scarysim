@@ -13,10 +13,10 @@ Scara::Scara(QObject *parent) :
     mode(SIMPLE),
     r1(1.5), r2(1.5)
 {
-    baseModel.load(":/base.obj");
-    arm1Model.load(":/arm1.obj");
-    arm2Model.load(":/arm2.obj");
-    arm3Model.load(":/arm3.obj");
+    baseModel.load("base.obj");
+    arm1Model.load("arm1.obj");
+    arm2Model.load("arm2.obj");
+    arm3Model.load("arm3.obj");
 
     kinPr();
 }
