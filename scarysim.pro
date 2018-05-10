@@ -8,7 +8,9 @@ QT       += core gui\
             opengl\
             widgets
 
-LIBS     += -lglu32 -lopengl32
+win32 {
+LIBS     += -lopengl32 -lglu32
+}
 
 TARGET = scarysim
 TEMPLATE = app
