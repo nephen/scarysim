@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>ScarySim</string>
+   <string>FlRobotSim</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="GLWidget" name="view" native="true">
@@ -353,7 +353,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Θ1</string>
+      <string>RX</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelThZ">
@@ -413,7 +413,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Θ2</string>
+      <string>RY</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_12">
@@ -433,7 +433,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Z</string>
+      <string>RZ</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelTh2">
@@ -634,7 +634,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

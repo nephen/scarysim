@@ -37,19 +37,19 @@ void GLWidget::paintGL()
     glEnable(GL_COLOR_MATERIAL);
     glDisable(GL_LIGHTING);
 
-    glColor4f(0.0, 0.5, 0.0, 0.5);
+    glColor4f(0.0, 0.5, 0.0, 0.5);  //Background drawing
     for(int i = 0; i <= 20; ++i) {
         glBegin(GL_LINES);
-            glVertex3f(-5.0+0.5*i, -5.0, 0.0); glVertex3f(-5.0+0.5*i, 5.0, 0.0);
-            glVertex3f(-5.0, -5.0+0.5*i, 0.0); glVertex3f(5.0, -5.0+0.5*i, 0.0);
+        glVertex3f(-5.0+0.5*i, -5.0, 0.0); glVertex3f(-5.0+0.5*i, 5.0, 0.0);
+        glVertex3f(-5.0, -5.0+0.5*i, 0.0); glVertex3f(5.0, -5.0+0.5*i, 0.0);
         glEnd();
     }
     glColor4f(0.5, 0.5, 0.0, 0.5);
     glBegin(GL_LINES);
-        glVertex3f(robot->getY(), -robot->getX(), 0.0); glVertex3f(robot->getY(), -robot->getX(), robot->getZ()+0.5);
+    glVertex3f(robot->getY(), -robot->getX(), 0.0); glVertex3f(robot->getY(), -robot->getX(), robot->getZ()+0.5);
     glEnd();
 
-    glColor4f(0.9, 0.0, 0.0, 0.5);
+    glColor4f(0.9, 0.0, 0.0, 0.5); //Path tracking
     robot->displayPath();
 
     glDisable(GL_COLOR_MATERIAL);
@@ -111,7 +111,7 @@ void GLWidget::setLight()
     glDisable(GL_LIGHT0);
     glColor4fv(ldif);
     glBegin(GL_POINTS);
-        glVertex4fv(lpos);
+    glVertex4fv(lpos);
     glEnd();
 
     glDisable(GL_COLOR_MATERIAL);

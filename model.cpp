@@ -6,6 +6,10 @@
 #include <QString>
 #include <QFileInfo>
 
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QDebug>
+
 Model::Model(QObject *parent) :
     QObject(parent)
 {
@@ -28,21 +32,29 @@ void Model::load(const char *filename)
     faces.clear();
     normals.clear();
 
-    std::ifstream file(filename);
+    // Specify file：
+    QFile file(filename);
 
-    if(!file) {
+    // Read only open:
+    file.open(QIODevice::ReadOnly);
+
+    if(!file.isOpen()) {
         std::cout << "Obj file not found\n";
         exit(-1);
     }
 
-    std::string s;
+    QString s;
     int current_material = -1;
 
-    while(getline(file, s)) {
+    // Text flow:
+    QTextStream in(&file);
+
+    // Read the text stream into a string:
+    while((s = in.readLine())!=NULL) {
         std::stringstream sstr;
 
-        replace(s, '/', ' ');
-        sstr << s;
+        s = s.replace(QRegExp("\\/"), " ");
+        sstr << s.toStdString();
 
         std::string cmd;
         sstr >> cmd;
@@ -104,6 +116,7 @@ void Model::load(const char *filename)
         }
     }
 
+    // Turn off text flow:
     file.close();
 
     std::cout << "Obj loaded\n";
@@ -113,19 +126,23 @@ void Model::load_materials()
 {
     std::cout << "Loading materials: " << matfile.c_str() << "\n";
 
-    std::ifstream file(matfile.c_str());
+    // Specify file：
+    QFile file(QString::fromStdString(matfile).prepend(":/"));
 
-    if(!file) {
+    // Read only open:
+    file.open(QIODevice::ReadOnly);
+
+    if(!file.isOpen()) {
         std::cout << "Mat file not found\n";
         exit(-1);
     }
 
-    std::string line;
+    QString line;
     Material nmat;
 
-    while(getline(file, line)) {
+    while((line=file.readLine()) != NULL) {
         std::stringstream sstr;
-        sstr << line;
+        sstr << line.toStdString();
 
         std::string cmd;
         sstr >> cmd;

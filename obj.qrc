@@ -4,5 +4,9 @@
         <file>arm2.obj</file>
         <file>arm3.obj</file>
         <file>base.obj</file>
+        <file>arm1.mtl</file>
+        <file>arm2.mtl</file>
+        <file>arm3.mtl</file>
+        <file>base.mtl</file>
     </qresource>
 </RCC>
