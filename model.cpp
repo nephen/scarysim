@@ -95,7 +95,7 @@ void Model::load(const char *filename)
 
             sstr >> vtx.x[0] >> vtx.x[1] >> vtx.x[2];
 
-            //vtx.x[1] *= -1; //odwroc y
+            //vtx.x[1] *= -1; //turns away
 
             vertex.push_back(vtx);
         }
@@ -106,7 +106,7 @@ void Model::load(const char *filename)
             sstr >> nrm.x[0] >> nrm.x[1] >> nrm.x[2];
 
             for(int i = 0; i < 3; nrm.x[i++] *= -1);
-            nrm.x[0] *= -1; //odwroc normale
+            nrm.x[0] *= -1; //reverse normal
             nrm.x[1] *= -1;
             nrm.x[2] *= -1;
 
@@ -129,7 +129,7 @@ void Model::load(const char *filename)
             std::string matname;
             sstr >> matname;
 
-            // znajdz numer materialu
+            // find the material number
             unsigned int i = 0;
             for(; i < materials.size(); ++i) {
                 if(matname == materials[i].name) break;
@@ -212,7 +212,7 @@ void Model::load_materials()
             nmat.specular[3] = alpha;
         }
 
-        // illum bo akurat program konczy blok tym i nie ma oprocz tego zadnego znaczenia
+        // illum because the program ends the block with this and there is no other than that
         if(cmd == "illum") {
             materials.push_back(nmat);
         }
@@ -225,8 +225,6 @@ void Model::load_materials()
 
 void Model::display()
 {
-    //std::cout << "display()\n";
-
     GLfloat emiss[4] = { 0.0, 0.0, 0.0, 0.0 };
 
     glBegin(GL_TRIANGLES);
@@ -235,10 +233,10 @@ void Model::display()
 
     std::vector<Face>::iterator i;
     for(i = faces.begin(); i < faces.end(); ++i) {
-        // jaki material?
+        // which material?
         int mat = (*i).material;
 
-        if(current_material != mat) { // ustaw nowe parametry tylko kiedy nastepuje zmiana materialu
+        if(current_material != mat) { // set new parameters only when there is a change in material
             Material m = materials[mat];
 
             glEnd();

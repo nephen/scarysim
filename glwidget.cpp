@@ -44,7 +44,7 @@ void GLWidget::paintGL()
         glVertex3f(-5.0, -5.0+0.5*i, 0.0); glVertex3f(5.0, -5.0+0.5*i, 0.0);
         glEnd();
     }
-    glColor4f(0.5, 0.5, 0.0, 0.5);
+    glColor4f(0.5, 0.5, 0.0, 0.5); //Draw end position
     glBegin(GL_LINES);
     glVertex3f(robot->getY(), -robot->getX(), 0.0); glVertex3f(robot->getY(), -robot->getX(), robot->getZ()+0.5);
     glEnd();
