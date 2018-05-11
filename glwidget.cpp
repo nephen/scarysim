@@ -1,6 +1,10 @@
 #include "glwidget.h"
 
+#if defined(Q_OS_WIN32)
 #include <GL/glu.h>
+#elif defined(Q_OS_DARWIN)
+#include <OpenGL/glu.h>
+#endif
 
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent),

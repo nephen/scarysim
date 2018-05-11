@@ -1,14 +1,10 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2011-10-02T21:14:46
-#
-#-------------------------------------------------
-
 QT       += core gui\
             opengl\
             widgets
 
-LIBS     += -lglu32 -lopengl32
+win32 {
+LIBS     += -lopengl32 -lglu32
+}
 
 TARGET = FlRobotSim
 TEMPLATE = app
@@ -29,9 +25,3 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     obj.qrc
-
-
-
-
-
-
